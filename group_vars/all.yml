@@ -1,0 +1,36 @@
+---
+temp_space: "{{ ansible_env.TEMP }}\\BlackMegaTemp"
+
+sysinternal_tools:
+  - procexp
+  - procmon
+  - TcpView
+  - AutoRuns
+
+choco_packages:
+  - git
+  - openjdk17
+  - winrar
+  - 7zip
+  - wireshark
+  - putty
+  - die
+  - explorersuite
+  - pebear
+  - PeStudio
+  - regshot
+  - dnspy
+  - dnspy-netfx
+  - x64dbg.portable
+  - ghidra
+  - microsoft-windows-terminal
+  - VisualStudioCode
+  - HxD
+  - python
+  - hashmyfiles
+  - dbeaver
+  - notepadplusplus
+  - sumatrapdf
+  - exeinfo
+  - spystudio
+  - resourcehacker.portable

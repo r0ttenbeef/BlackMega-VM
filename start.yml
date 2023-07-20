@@ -1,0 +1,5 @@
+---
+- name: Malware Analysis lab windows setup
+  hosts: all
+  roles:
+    - BlackMega-VM

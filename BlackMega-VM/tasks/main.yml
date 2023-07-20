@@ -1,0 +1,29 @@
+---
+# tasks file for BlackMega-VM
+- name: Create required folders
+  include_tasks: create_folders.yml
+  when: ansible_os_family == 'Windows'
+
+- name: Windows debloating
+  include_tasks: debloat.yml
+  when: ansible_os_family == 'Windows'
+
+- name: Windows configuring
+  include_tasks: configs.yml
+  when: ansible_os_family == 'Windows'
+
+- name: Install analysis tools
+  include_tasks: tools.yml
+  when: ansible_os_family == 'Windows'
+
+- name: Disable windows updates and some features
+  include_tasks: utils.yml
+  when: ansible_os_family == 'Windows'
+
+- name: Pin necessary applications to taskbar
+  include_tasks: taskbar.yml
+  when: ansible_os_family == 'Windows'
+
+- name: Powershell Transcript
+  include_tasks: transcript.yml
+  when: ansible_os_family == 'Windows'

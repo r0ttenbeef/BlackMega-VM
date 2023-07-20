@@ -1,0 +1,24 @@
+- name: Taskbar | Remove all useless pinned applications
+  win_file:
+    path: "{{ ansible_env.APPDATA }}\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned\\TaskBar"
+    state: absent
+
+- name: Taskbar | Remove useless pinned applications from registry
+  win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband
+    state: absent
+    delete_key: false
+
+- name: Taskbar | Transfer the taskbar registry file
+  win_copy:
+    src: "{{ role_path }}/files/taskbar.reg"
+    dest: "{{ temp_space }}\\taskbar.reg"
+
+- name: Taskbar | Transfer the taskbar files
+  win_copy:
+    src: "{{ role_path }}/files/TaskBar"
+    dest: "{{ ansible_env.APPDATA }}\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned"
+
+- name: Taskbar | Apply taskbar registry keys
+  win_shell: |
+    cmd /c 'reg import {{ temp_space }}\taskbar.reg'

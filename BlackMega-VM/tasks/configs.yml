@@ -1,0 +1,30 @@
+---
+- name: Configurations | Show files extensions
+  win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+    name: HideFileExt
+    data: 0
+    type: dword
+    state: present
+
+- name: Configurations | Enable showing hidden files via registry
+  win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+    name: Hidden
+    data: 1
+    type: dword
+    state: present
+
+- name: Configurations | Enable showing protected operating system files via registry
+  win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+    name: ShowSuperHidden
+    data: 1
+    type: dword
+    state: present
+
+- name: Configurations | Revert back to the classic context menu on windows 11
+  win_regedit:
+    path: HKCU:\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32
+    data: ''
+    state: present

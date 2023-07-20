@@ -1,0 +1,44 @@
+---
+#- name: Windows Disabling | Install PSCX
+#  win_psmodule:
+#    name: Pscx
+#    state: present
+#    accept_license: true
+#    allow_clobber: true
+
+- name: Windows Disabling | Download required utilities
+  win_get_url:
+    url: "{{ item.link }}"
+    dest: "{{ temp_space }}\\{{ item.name }}"
+  loop:
+    - { link: "https://www.sordum.org/files/downloads.php?st-windows-update-blocker", name: "windows-update-blocker.zip" }
+    - { link: "https://www.sordum.org/files/downloads.php?st-edge-block", name: "edge-block.zip" }
+    - { link: "https://www.sordum.org/files/downloads.php?st-net-disabler", name: "net-disabler.zip" }
+
+- name: Windows Disabling | Unzip downloaded utilities
+  win_unzip:
+    src: "{{ temp_space }}\\{{ item.archive }}"
+    dest: "{{ temp_space }}"
+    delete_archive: true
+  loop:
+    - { archive: "windows-update-blocker.zip" }
+    - { archive: "edge-block.zip" }
+    - { archive: "net-disabler.zip" }
+
+- name: Windows Disabling | Moving the required files only to Maintainance
+  win_copy:
+    src: "{{ temp_space }}\\{{ item.file_path }}"
+    dest: "{{ ansible_env.USERPROFILE }}\\Desktop\\My_Tools\\Maintainance\\{{ item.file_name }}"
+    remote_src: true
+  loop:
+    - { file_path: "Wub\\Wub_x64.exe", file_name: "Windows Update Blocker.exe" }
+    - { file_path: "EdgeBlock\\EdgeBlock_x64.exe", file_name: "Edge Block.exe" }
+    - { file_path: "NetDisabler\\NetDisabler_x64.exe", file_name: "Net Disabler.exe" }
+
+- name: Windows Disabling | Disable windows updates
+  win_shell: |
+   cmd /c '{{ ansible_env.USERPROFILE }}\Desktop\My_Tools\Maintainance\Windows Update Blocker.exe' /D /P
+
+- name: windows Disable | Disable microsoft edge
+  win_shell: |
+    cmd /c '{{ ansible_env.USERPROFILE }}\Desktop\My_Tools\Maintainance\Edge Block.exe' /B

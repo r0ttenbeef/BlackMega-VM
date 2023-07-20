@@ -1,0 +1,50 @@
+---
+- name: Desktop Customizing | Remove Edge shortcut
+  win_file:
+    path: "{{ ansible_env.USERPROFILE }}\\Desktop\\Microsoft Edge.lnk"
+    state: absent
+
+- name: Desktop Customizing | Create desktop folders
+  win_file:
+    path: "{{ ansible_env.USERPROFILE }}\\Desktop\\{{ item.folder }}"
+    state: directory
+  loop:
+    - { folder: "My_Tools" }
+    - { folder: "My_Tools\\Maintainance" }
+    - { folder: "My_Tools\\Sysinternals" }
+    - { folder: "My_Tools\\Static Analysis" }
+    - { folder: "My_Tools\\Dynamic Analysis" }
+    - { folder: "My_Tools\\Decompile and Deobfuscate" }
+    - { folder: "My_Tools\\Reverse Engineering" }
+    - { folder: "My_Tools\\Miscellaneous" }
+    - { folder: "PS_Transcript Logs" }
+
+- name: Desktop Customizing | Create temporary folder for setup
+  win_file:
+    path: "{{ temp_space }}"
+    state: directory
+
+- name: Desktop Customizing | Change folder icon
+  win_template:
+    src: "desktop.ini.j2"
+    dest: "{{ ansible_env.USERPROFILE }}\\Desktop\\{{ item.folder_name }}\\desktop.ini"
+  loop:
+    - { folder_name: "My_Tools", icon: "158" }
+    - { folder_name: "PS_Transcript Logs", icon: "213" }
+
+- name: Desktop Customizing | Set desktop.ini attributes
+  win_acl:
+    path: "{{ ansible_env.USERPROFILE }}\\Desktop\\{{ item.folder_name }}\\desktop.ini"
+    user: SYSTEM
+    rights: FullControl
+    type: deny
+  loop:
+    - { folder_name: "My_Tools" }
+    - { folder_name: "PS_Transcript Logs" }
+
+- name: Desktop Customizing | Change desktop.ini file attributes
+  win_shell: |
+    attrib +h '{{ ansible_env.USERPROFILE }}\Desktop\{{ item.folder_name }}\desktop.ini'
+  loop:
+    - { folder_name: "My_Tools" }
+    - { folder_name: "PS_Transcript Logs" }
