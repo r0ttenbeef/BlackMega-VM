@@ -1,5 +1,5 @@
 # BlackMega-VM
-Convert windows virtual machine to a lab for malware analysis using ansible playbooks for automated installation of malware analysis tools and gadgest, Debloating useless windows services to reduce windows traffic noise and overwhelming running processes.
+Convert windows virtual machine to a lab for malware analysis using [Ansible](https://www.ansible.com/) playbooks for automated installation of malware analysis tools and gadgest, Debloating useless windows services to reduce windows traffic noise and overwhelming running processes.
 
 ## Good to know 
 The default BlackMega VM tools are installed using [Chocolaty](https://chocolatey.org/) package manager for windows for easy and fast installation, The tools list are stored in `group_vars/all.yml` as it's easy to be modified as needed.
