@@ -4,7 +4,7 @@ Convert windows virtual machine to a lab for malware analysis using [Ansible](ht
 ## Good to know 
 The default BlackMega VM tools are installed using [Chocolaty](https://chocolatey.org/) package manager for windows for easy and fast installation, The tools list are stored in `group_vars/all.yml` as it's easy to be modified as needed.
 
-Be informed that some windows tools are features will be disabled or remove like disabling windows updates using [Windows update blocker]https://www.sordum.org/9470/windows-update-blocker-v1-8/ tool, Blocking Microsoft Edge and removing windows bloatware using [Windows10Debloater](https://github.com/Sycnex/Windows10Debloater) which is working for windows 11 perfectly.
+Be informed that some windows tools are features will be disabled or remove like disabling windows updates using [Windows update blocker](https://www.sordum.org/9470/windows-update-blocker-v1-8) tool, Blocking Microsoft Edge and removing windows bloatware using [Windows10Debloater](https://github.com/Sycnex/Windows10Debloater) which is working for windows 11 perfectly.
 
 ## Requirements
 Just an up and running up-to-date windows 10 or windows 11 virtual machine without bother doing any extra installation, Just your preferred browser.
