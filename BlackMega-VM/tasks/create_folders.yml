@@ -1,9 +1,4 @@
 ---
-- name: Desktop Customizing | Remove Edge shortcut
-  win_file:
-    path: "{{ ansible_env.USERPROFILE }}\\Desktop\\Microsoft Edge.lnk"
-    state: absent
-
 - name: Desktop Customizing | Create desktop folders
   win_file:
     path: "{{ ansible_env.USERPROFILE }}\\Desktop\\{{ item.folder }}"
