@@ -13,4 +13,4 @@
 
 - name: Tools | Enable NetFx3 features
   win_shell: |
-    cmd /c "DISM /Quiet /Online /Enable-Feature /FeatureName:NetFx3 /All"
+    DISM /Quiet /Online /Enable-Feature /FeatureName:NetFx3 /All
