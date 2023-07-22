@@ -1,16 +1,46 @@
 ---
-- name: Tools | Initiate tools installation using chocolatey package manager
-  win_chocolatey:
-    name: "{{ item }}"
-    state: present
-  loop: "{{ choco_packages }}"
+#- name: Tools | Initiate tools installation using chocolatey package manager
+#  win_chocolatey:
+#    name: "{{ item }}"
+#    state: present
+#  loop: "{{ choco_packages }}"
 
-- name: Tools | Install Sysinternal Gadgets
-  win_chocolatey:
-    name: "{{ item }}"
-    state: present
-  loop: "{{ sysinternal_tools }}"
+#- name: Tools | Install Sysinternal Gadgets
+#  win_chocolatey:
+#    name: "{{ item }}"
+#    state: present
+#  loop: "{{ sysinternal_tools }}"
 
-- name: Tools | Enable NetFx3 features
-  win_shell: |
-    DISM /Quiet /Online /Enable-Feature /FeatureName:NetFx3 /All
+#- name: Tools | Enable NetFx3 features
+#  win_shell: |
+#    DISM /Quiet /Online /Enable-Feature /FeatureName:NetFx3 /All
+
+- name: Tools | Create shortcut for each tool in the folder categories
+  win_shortcut:
+    src: "{{ item.exe }}"
+    dest: "{{ ansible_env.USERPROFILE }}\\Desktop\\My_Tools\\{{ item.folder }}\\{{ item.lnk }}.lnk"
+    icon: "{{ item.exe }},0"
+  loop:
+    - { exe: "%ProgramData%\\chocolatey\\lib\\procmon\\tools\\Procmon64.exe",                            lnk: "Procmon",                   folder: "Sysinternals" }
+    - { exe: "%ProgramData%\\chocolatey\\lib\\procexp\\tools\\procexp64.exe",                            lnk: "ProcessExplorer",           folder: "Sysinternals" }
+    - { exe: "%ProgramData%\\chocolatey\\lib\\autoruns\\tools\\Autoruns64.exe",                          lnk: "Autoruns",                  folder: "Sysinternals" }
+    - { exe: "%ProgramData%\\Microsoft\\Windows\\Start Menu\\Programs\\Ghidra.lnk",                      lnk: "Ghidra",                    folder: "Reverse Engineering" }
+    - { exe: "%ProgramData%\\chocolatey\\lib\\x64dbg.portable\\tools\\release\\x32\\x32dbg.exe",         lnk: "x32dbg",                    folder: "Reverse Engineering" }
+    - { exe: "%ProgramData%\\chocolatey\\lib\\x64dbg.portable\\tools\\release\\x64\\x64dbg.exe",         lnk: "x64dbg",                    folder: "Reverse Engineering" }
+    - { exe: "%ProgramFiles%\\Wireshark\\Wireshark.exe",                                                 lnk: "Wireshark",                 folder: "Network Analysis"}
+    - { exe: "%ProgramFiles%\\Microsoft Network Monitor 3\\netmon.exe",                                  lnk: "Microsoft Network Monitor", folder: "Network Analysis" }
+    - { exe: "%ProgramData%\\chocolatey\\lib\\die\\tools\\die.exe",                                      lnk: "Detect It Easy",            folder: "File Analysis" }
+    - { exe: "%ProgramFiles%\\NTCore\\Explorer Suite\\CFF Explorer.exe",                                 lnk: "CFF Explorer",              folder: "File Analysis" }
+    - { exe: "%ProgramFiles%\\NTCore\\Explorer Suite\\PE Detective.exe",                                 lnk: "PE Detective",              folder: "File Analysis" }
+    - { exe: "%ProgramData%\\chocolatey\\bin\\PE-bear.exe",                                              lnk: "PE-Bear",                   folder: "File Analysis" }
+    - { exe: "%ProgramData%\\chocolatey\\bin\\pestudio.exe",                                             lnk: "PE Studio",                 folder: "File Analysis" }
+    - { exe: "%ProgramData%\\chocolatey\\lib\\hashmyfiles\\HashMyFiles.exe",                             lnk: "HashMyFiles",               folder: "File Analysis" }
+    - { exe: "%ProgramFiles%\\HxD\\HxD.exe",                                                             lnk: "HxD",                       folder: "File Analysis" }
+    - { exe: "%ProgramFiles%\\DBeaver\\dbeaver.exe",                                                     lnk: "DBeaver",                   folder: "File Analysis" }
+    - { exe: "C:\\Program Files (x86)\\Resource Hacker\\ResourceHacker.exe",                             lnk: "ResourceHacker",            folder: "File Analysis" }
+    - { exe: "%ProgramData%\\chocolatey\\lib\\RegShot\\bin\\Regshot-x64-Unicode.exe",                    lnk: "Regshot-x64-Unicode",       folder: "Dynamic Analysis" }
+    - { exe: "%ProgramData%\\chocolatey\\bin\\SpyStudio.exe",                                            lnk: "SpyStudio",                 folder: "Dynamic Analysis" }
+    - { exe: "%ProgramData%\\chocolatey\\bin\\dnSpy.exe",                                                lnk: "dnSpy",                     folder: "Decompile and Deobfuscate" }
+    - { exe: "%ProgramData%\\chocolatey\\bin\\dnSpy-x86.exe",                                            lnk: "dnSpy-x86",                 folder: "Decompile and Deobfuscate" }
+    - { exe: "{{ ansible_env.APPDATA }}\\Microsoft\\Windows\\Start Menu\\Programs\\Java Decompiler.lnk", lnk: "Java Decompiler",           folder: "Decompile and Deobfuscate" }
+    - { exe: "%ProgramData%\\chocolatey\\bin\\Putty.exe",                                                lnk: "Putty",                     folder: "Miscellaneous" }
