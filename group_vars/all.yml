@@ -21,6 +21,7 @@ choco_packages:
   - explorersuite
   - pebear
   - PeStudio
+  - reshack
   - regshot
   - dnspy
   - dnspy-netfx
@@ -34,4 +35,3 @@ choco_packages:
   - notepadplusplus
   - sumatrapdf
   - spystudio
-  - resourcehacker.portable
