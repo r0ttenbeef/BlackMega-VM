@@ -4,15 +4,14 @@ temp_space: "{{ ansible_env.TEMP }}\\BlackMegaTemp"
 sysinternal_tools:
   - procexp
   - procmon
-  - TcpView
   - AutoRuns
 
 choco_packages:
   - vcredist140
   - netfx-4.8
+  - openjdk17
   - python
   - git
-  - openjdk17
   - winrar
   - 7zip
   - wireshark
@@ -27,6 +26,7 @@ choco_packages:
   - dnspy-netfx
   - x64dbg.portable
   - ghidra
+  - javadecompiler-gui
   - VisualStudioCode
   - HxD
   - hashmyfiles
