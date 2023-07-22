@@ -19,6 +19,22 @@
     src: "{{ role_path }}/files/TaskBar"
     dest: "{{ ansible_env.APPDATA }}\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned"
 
+- name: Taskbar | Create shortcuts for the taskbar pinned applications
+  win_shortcut:
+    src: "{{ item.exe }}"
+    dest: "{{ ansible_env.APPDATA }}\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned\\{{ item.lnk }}.lnk"
+    icon: "{{ item.exe }},0"
+  loop:
+    - { exe: "explorer.exe", lnk: "File Explorer" }
+    - { exe: "%ProgramFiles%\\Google\\Chrome\\Application\\chrome.exe", lnk: "Google Chrome" }
+    - { exe: "%ProgramFiles%\\Microsoft VS Code\\Code.exe", lnk: "Visual Studio Code" }
+    - { exe: "%ProgramFiles%\\Wireshark\\Wireshark.exe", lnk: "Wireshark" }
+    - { exe: "%ProgramFiles%\\HxD\\HxD.exe", lnk: "HxD" }
+    - { exe: "%ProgramData%\\chocolatey\\lib\\pebear\\tools\\PE-bear.exe", lnk: "PE-bear" }
+    - { exe: "%ProgramData%\\chocolatey\\lib\\die\\tools\\die.exe", lnk: "Detect It Easy" }
+    - { exe: "%ProgramData%\\chocolatey\\lib\\procmon\\tools\\Procmon.exe", lnk: "Process Monitor" }
+    - { exe: "%ProgramData%\\chocolatey\\lib\\procexp\\tools\\procexp64.exe", lnk: "Process Explorer" }
+
 - name: Taskbar | Apply taskbar registry keys
   win_shell: |
     cmd /c 'reg import {{ temp_space }}\taskbar.reg'
