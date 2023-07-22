@@ -14,6 +14,11 @@
   win_shell: |
     IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/Sycnex/Windows10Debloater/raw/master/Individual%20Scripts/Disable%20Cortana")
 
+- name: Debloat | Reinstall Microsoft Terminal
+  win_chocolatey:
+    name: "microsoft-windows-terminal"
+    state: present
+
 # TODO: Windows AMSI needs to be patched
 #- name: Debloat | Disable Windows Defender
 #  win_shell: |

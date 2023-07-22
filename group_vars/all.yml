@@ -8,11 +8,15 @@ sysinternal_tools:
   - AutoRuns
 
 choco_packages:
+  - vcredist140
+  - netfx-4.8
+  - python
   - git
   - openjdk17
   - winrar
   - 7zip
   - wireshark
+  - networkmonitor
   - putty
   - die
   - explorersuite
@@ -23,14 +27,11 @@ choco_packages:
   - dnspy-netfx
   - x64dbg.portable
   - ghidra
-  - microsoft-windows-terminal
   - VisualStudioCode
   - HxD
-  - python
   - hashmyfiles
   - dbeaver
   - notepadplusplus
   - sumatrapdf
-  - exeinfo
   - spystudio
   - resourcehacker.portable

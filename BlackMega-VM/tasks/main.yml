@@ -4,16 +4,16 @@
   include_tasks: create_folders.yml
   when: ansible_os_family == 'Windows'
 
-- name: Windows debloating
-  include_tasks: debloat.yml
-  when: ansible_os_family == 'Windows'
-
 - name: Windows configuring
   include_tasks: configs.yml
   when: ansible_os_family == 'Windows'
 
 - name: Install analysis tools
   include_tasks: tools.yml
+  when: ansible_os_family == 'Windows'
+
+- name: Windows debloating
+  include_tasks: debloat.yml
   when: ansible_os_family == 'Windows'
 
 - name: Disable windows updates and some features
