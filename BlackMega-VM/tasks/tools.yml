@@ -1,19 +1,19 @@
 ---
-#- name: Tools | Initiate tools installation using chocolatey package manager
-#  win_chocolatey:
-#    name: "{{ item }}"
-#    state: present
-#  loop: "{{ choco_packages }}"
+- name: Tools | Initiate tools installation using chocolatey package manager
+  win_chocolatey:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ choco_packages }}"
 
-#- name: Tools | Install Sysinternal Gadgets
-#  win_chocolatey:
-#    name: "{{ item }}"
-#    state: present
-#  loop: "{{ sysinternal_tools }}"
+- name: Tools | Install Sysinternal Gadgets
+  win_chocolatey:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ sysinternal_tools }}"
 
-#- name: Tools | Enable NetFx3 features
-#  win_shell: |
-#    DISM /Quiet /Online /Enable-Feature /FeatureName:NetFx3 /All
+- name: Tools | Enable NetFx3 features
+  win_shell: |
+    DISM /Quiet /Online /Enable-Feature /FeatureName:NetFx3 /All
 
 - name: Tools | Create shortcut for each tool in the folder categories
   win_shortcut:
