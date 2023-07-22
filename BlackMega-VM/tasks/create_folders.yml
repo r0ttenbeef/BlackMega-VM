@@ -7,7 +7,8 @@
     - { folder: "My_Tools" }
     - { folder: "My_Tools\\Maintainance" }
     - { folder: "My_Tools\\Sysinternals" }
-    - { folder: "My_Tools\\Static Analysis" }
+    - { folder: "My_Tools\\File Analysis" }
+    - { folder: "My_Tools\\Network Analysis" }
     - { folder: "My_Tools\\Dynamic Analysis" }
     - { folder: "My_Tools\\Decompile and Deobfuscate" }
     - { folder: "My_Tools\\Reverse Engineering" }
