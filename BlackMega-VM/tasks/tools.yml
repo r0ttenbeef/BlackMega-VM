@@ -1,4 +1,14 @@
 ---
+- name: Tools | Install KB5028185 particular update
+  win_updates:
+    category_names: '*'
+    accept_list: KB5028185
+
+- name: Tools | Enable NetFx3 features
+  win_optional_feature:
+    name: NetFx3
+    state: present
+
 - name: Tools | Initiate tools installation using chocolatey package manager
   win_chocolatey:
     name: "{{ item }}"
@@ -10,10 +20,6 @@
     name: "{{ item }}"
     state: present
   loop: "{{ sysinternal_tools }}"
-
-- name: Tools | Enable NetFx3 features
-  win_shell: |
-    DISM /Quiet /Online /Enable-Feature /FeatureName:NetFx3 /All
 
 - name: Tools | Create shortcut for each tool in the folder categories
   win_shortcut:
