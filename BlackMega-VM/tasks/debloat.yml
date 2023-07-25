@@ -18,8 +18,4 @@
   win_chocolatey:
     name: "microsoft-windows-terminal"
     state: present
-
-# TODO: Windows AMSI needs to be patched
-#- name: Debloat | Disable Windows Defender
-#  win_shell: |
-#    IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/jeremybeaume/tools/raw/master/disable-defender.ps1")
+    force: yes
