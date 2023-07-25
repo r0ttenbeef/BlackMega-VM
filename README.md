@@ -1,10 +1,10 @@
 # BlackMega-VM
-Convert windows virtual machine to a lab for malware analysis using [Ansible](https://www.ansible.com/) playbooks for automated installation of malware analysis tools and gadgest, Debloating useless windows services to reduce windows traffic noise and overwhelming running processes.
+Convert windows virtual machine to a lab for malware analysis using ansible playbooks for automated installation of malware analysis tools and gadgets, Debloating useless windows services to reduce windows traffic noise and overwhelming running processes.
 
 ## Good to know 
 The default BlackMega VM tools are installed using [Chocolaty](https://chocolatey.org/) package manager for windows for easy and fast installation, The tools list are stored in `group_vars/all.yml` as it's easy to be modified as needed.
 
-Be informed that some windows tools are features will be disabled or remove like disabling windows updates using [Windows update blocker](https://www.sordum.org/9470/windows-update-blocker-v1-8) tool, Blocking Microsoft Edge and removing windows bloatware using [Windows10Debloater](https://github.com/Sycnex/Windows10Debloater) which is working for windows 11 perfectly.
+Be informed that some windows tools are features will be disabled or remove like disabling windows updates using [Windows update blocker](https://www.sordum.org/9470/windows-update-blocker-v1-8/ tool), Blocking Microsoft Edge and removing windows bloatware using [Windows10Debloater](https://github.com/Sycnex/Windows10Debloater) which is working for windows 11 perfectly.
 
 ## Requirements
 Just an up and running up-to-date windows 10 or windows 11 virtual machine without bother doing any extra installation, Just your preferred browser.
@@ -31,6 +31,9 @@ winrm set winrm/config/service '@{AllowUnencrypted="true"}'
 
 4. Disable User Account Control Settings (UAC)
 ![Pasted image 20230718003110](https://github.com/r0ttenbeef/BlackMega-VM/assets/48027449/d0c84f78-ee5e-4f43-bd29-8cb66b32500d)
+
+5. Make sure that the user is in **Administrators** group
+![Pasted image 20230722190015](https://github.com/r0ttenbeef/BlackMega-VM/assets/48027449/1ec81bee-e288-48cd-92f0-2794d5de2f5e)
 
 ### Initiate the installation
 After cloning the BlackMega VM repository install python **winrm** module.
