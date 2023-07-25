@@ -40,7 +40,7 @@
 
 - name: Desktop Customizing | Change desktop.ini file attributes
   win_shell: |
-    attrib +h '{{ ansible_env.USERPROFILE }}\Desktop\{{ item.folder_name }}\desktop.ini'
+    attrib -a +h +s '{{ ansible_env.USERPROFILE }}\Desktop\{{ item.folder_name }}\desktop.ini'
   loop:
     - { folder_name: "My_Tools" }
     - { folder_name: "PS_Transcript Logs" }
