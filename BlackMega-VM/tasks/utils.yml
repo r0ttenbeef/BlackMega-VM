@@ -1,11 +1,4 @@
 ---
-#- name: Windows Disabling | Install PSCX
-#  win_psmodule:
-#    name: Pscx
-#    state: present
-#    accept_license: true
-#    allow_clobber: true
-
 - name: Windows Disabling | Download required utilities
   win_get_url:
     url: "{{ item.link }}"
@@ -20,10 +13,12 @@
     src: "{{ temp_space }}\\{{ item.archive }}"
     dest: "{{ temp_space }}"
     delete_archive: true
+    password: sordum
   loop:
     - { archive: "windows-update-blocker.zip" }
     - { archive: "edge-block.zip" }
     - { archive: "net-disabler.zip" }
+    - { archive: "defender-control.zip" }
 
 - name: Windows Disabling | Moving the required files only to Maintainance
   win_copy:
