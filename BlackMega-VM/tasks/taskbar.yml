@@ -17,7 +17,7 @@
 - name: Taskbar | Create shortcuts for the taskbar pinned applications
   win_shortcut:
     src: "{{ item.exe }}"
-    dest: "{{ ansible_env.APPDATA }}\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned\\{{ item.lnk }}.lnk"
+    dest: "{{ ansible_env.APPDATA }}\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned\\Taskbar\\{{ item.lnk }}.lnk"
     icon: "{{ item.exe }},0"
   loop:
     - { exe: "explorer.exe", lnk: "File Explorer" }
