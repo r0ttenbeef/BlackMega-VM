@@ -1,39 +1,39 @@
 ---
-- name: Tools | Searching KB5028185 particular update
-  win_updates:
-    category_names: SecurityUpdates
-    accept_list: KB5028185
-    state: installed
+#- name: Tools | Searching KB5028185 particular update
+#  win_updates:
+#    category_names: SecurityUpdates
+#    accept_list: KB5028185
+#    state: installed
 
-- name: Tools | Enable NetFx3 features
-  win_optional_feature:
-    name: NetFx3
-    state: present
-  ignore_errors: true
+#- name: Tools | Enable NetFx3 features
+#  win_optional_feature:
+#    name: NetFx3
+#    state: present
+#  ignore_errors: true
 
-- name: Tools | Install Sysinternal Gadgets
-  win_chocolatey:
-    name: "{{ item }}"
-    state: present
-  loop: "{{ sysinternal_tools }}"
+#- name: Tools | Install Sysinternal Gadgets
+#  win_chocolatey:
+#    name: "{{ item }}"
+#    state: present
+#  loop: "{{ sysinternal_tools }}"
 
-- name: Tools | Install KB5028185 particular update
-  win_updates:
-    category_names: SecurityUpdates
-    accept_list: KB5028185
-    state: installed
+#- name: Tools | Install KB5028185 particular update
+#  win_updates:
+#    category_names: SecurityUpdates
+#    accept_list: KB5028185
+#    state: installed
 
-- name: Tools | Enable NetFx3 features
-  win_optional_feature:
-    name: NetFx3
-    state: present
-  ignore_errors: true
+#- name: Tools | Enable NetFx3 features
+#  win_optional_feature:
+#    name: NetFx3
+#    state: present
+#  ignore_errors: true
 
-- name: Tools | Initiate tools installation using chocolatey package manager
-  win_chocolatey:
-    name: "{{ item }}"
-    state: present
-  loop: "{{ choco_packages }}"
+#- name: Tools | Initiate tools installation using chocolatey package manager
+#  win_chocolatey:
+#    name: "{{ item }}"
+#    state: present
+#  loop: "{{ choco_packages }}"
 
 - name: Tools | Create shortcut for each tool in the folder categories
   win_shortcut:
@@ -64,3 +64,8 @@
     - { exe: "%ProgramData%\\chocolatey\\bin\\dnSpy-x86.exe",                                            lnk: "dnSpy-x86",                 folder: "Decompile and Deobfuscate" }
     - { exe: "{{ ansible_env.APPDATA }}\\Microsoft\\Windows\\Start Menu\\Programs\\Java Decompiler.lnk", lnk: "Java Decompiler",           folder: "Decompile and Deobfuscate" }
     - { exe: "%ProgramData%\\chocolatey\\bin\\Putty.exe",                                                lnk: "Putty",                     folder: "Miscellaneous" }
+
+- name: Tools | Transfer startmenu configurations
+  win_copy:
+    src: "{{ role_path }}/files/start2.bin"
+    dest: "{{ ansible_env.LOCALAPPDATA }}\\Packages\\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\\LocalState\\start2.bin"
