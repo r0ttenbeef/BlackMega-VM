@@ -14,11 +14,6 @@
     src: "{{ role_path }}/files/taskbar.reg"
     dest: "{{ temp_space }}\\taskbar.reg"
 
-- name: Taskbar | Transfer the taskbar files
-  win_copy:
-    src: "{{ role_path }}/files/TaskBar"
-    dest: "{{ ansible_env.APPDATA }}\\Microsoft\\Internet Explorer\\Quick Launch\\User Pinned"
-
 - name: Taskbar | Create shortcuts for the taskbar pinned applications
   win_shortcut:
     src: "{{ item.exe }}"
