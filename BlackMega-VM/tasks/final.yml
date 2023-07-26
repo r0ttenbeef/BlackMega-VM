@@ -1,8 +1,8 @@
 ---
 - name: Finalize | Transfer wallpaper to the lab machine
   win_copy:
-    src: "{{ role_path }}/files/BlackMegaVM.png"
-    dest: "{{ ansible_env.USERPROFILE }}\\Pictures\\BlackMegaVM.png"
+    src: "{{ role_path }}/files/BlackMegaVM.jpg"
+    dest: "{{ ansible_env.USERPROFILE }}\\Pictures\\BlackMegaVM.jpg"
 
 - name: Finalize | Set dark theme
   win_regedit:
