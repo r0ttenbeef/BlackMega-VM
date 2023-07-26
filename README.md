@@ -5,7 +5,9 @@
 ![OS Windows](https://img.shields.io/badge/Supported%20OS-Windows11-blue.svg)
 
 </div>
+
 ---
+
 # BlackMega-VM
 Convert windows virtual machine to a lab for malware analysis using ansible playbooks for automated installation of malware analysis tools and gadgets, Debloating useless windows services to reduce windows traffic noise and overwhelming running processes.
 
