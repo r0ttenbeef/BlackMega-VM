@@ -23,3 +23,7 @@
 - name: Powershell Transcript
   include_tasks: transcript.yml
   when: ansible_os_family == 'Windows'
+
+- name: Finalizing the installation
+  include_tasks: final.yml
+  when: ansible_os_family == 'Windows'
