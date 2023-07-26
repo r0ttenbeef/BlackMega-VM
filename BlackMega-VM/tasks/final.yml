@@ -1,0 +1,49 @@
+---
+- name: Finalize | Transfer wallpaper to the lab machine
+  win_copy:
+    src: "{{ role_path }}/files/BlackMegaVM.png"
+    dest: "{{ ansible_env.USERPROFILE }}\\Pictures\\BlackMegaVM.png"
+
+- name: Finalize | Set dark theme
+  win_regedit:
+    path: "{{ item.reg }}"
+    name: "{{ item.key }}"
+    data: "{{ item.data }}"
+    type: "{{ item.type }}"
+    state: present
+  loop:
+    - { reg: HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes, key: CurrentTheme, data: C:\Windows\resources\Themes\dark.theme, type: string }
+    - { reg: HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes, key: ThemeMRU, data: C:\Windows\resources\Themes\dark.theme;, type: string }
+    - { reg: HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize, key: AppsUseLightTheme, data: 0x00, type: dword }
+    - { reg: HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize, key: SystemUsesLightTheme, data: 0x00, type: dword }
+
+- name: Finalize | Set the desktop wallpaper
+  win_regedit:
+    path: HKCU:\Control Panel\Desktop
+    name: Wallpaper
+    data: "{{ ansible_env.USERPROFILE }}\\Pictures\\BlackMegaVM.jpg"
+    type: string
+    state: present
+
+- name: Finalize | Make wallpaper style center
+  win_regedit:
+    path: HKCU:\Control Panel\Desktop
+    name: WallpaperStyle
+    data: 0
+    type: string
+    state: present
+
+- name: Finalize | Change the background color
+  win_regedit:
+    path: HKCU:\Control Panel\Colors
+    name: Background
+    data: 1 31 75
+    type: string
+    state: present
+
+- name: Finalize | Show accent color on Start and taskbar
+  win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize
+    name: ColorPrevalence
+    data: 0x01
+    type: dword
