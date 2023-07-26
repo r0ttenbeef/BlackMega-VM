@@ -70,7 +70,7 @@
     src: "{{ role_path }}/files/start2.bin"
     dest: "{{ ansible_env.LOCALAPPDATA }}\\Packages\\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\\LocalState\\start2.bin"
 
-- name: Debloat | Get all shortcut files
+- name: Tools | Get all shortcut files
   win_find:
     paths:
       - "{{ ansible_env.PUBLIC }}\\Desktop"
@@ -78,7 +78,7 @@
     patterns: "*.lnk"
   register: lnk_files
 
-- name: Debloat | Delete .lnk files
+- name: Tools | Delete .lnk files
   win_file:
     path: "{{ item.path }}"
     state: absent
