@@ -1,4 +1,18 @@
 ---
+- name: Debloat | Get all shortcut files
+  win_find:
+    paths:
+      - "{{ ansible_env.PUBLIC }}\\Desktop"
+      - "{{ ansible_env.USERPROFILE }}\\Desktop"
+    patterns: "*.lnk"
+  register: lnk_files
+
+- name: Debloat | Delete .lnk files
+  win_file:
+    path: "{{ item.path }}"
+    state: absent
+  with_items: "{{ lnk_files.files }}"
+
 - name: Debloat | Powershell execution policy unrestricted
   win_shell: Set-ExecutionPolicy Unrestricted -Force
 
