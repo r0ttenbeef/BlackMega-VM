@@ -69,3 +69,25 @@
   win_copy:
     src: "{{ role_path }}/files/start2.bin"
     dest: "{{ ansible_env.LOCALAPPDATA }}\\Packages\\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\\LocalState\\start2.bin"
+
+- name: Debloat | Get all shortcut files
+  win_find:
+    paths:
+      - "{{ ansible_env.PUBLIC }}\\Desktop"
+      - "{{ ansible_env.USERPROFILE }}\\Desktop"
+    patterns: "*.lnk"
+  register: lnk_files
+
+- name: Debloat | Delete .lnk files
+  win_file:
+    path: "{{ item.path }}"
+    state: absent
+  with_items: "{{ lnk_files.files }}"
+
+- name: Tools | Create some shortcuts on desktop
+  win_shortcut:
+    src: "{{ item.exe }}"
+    dest: "{{ ansible_env.PUBLIC }}\\Desktop\\{{ item.lnk }}.lnk"
+  loop:
+    - { exe: "{{ ansible_env.USERPROFILE }}\\Desktop\\My_Tools\\Maintainance\\Windows Update Blocker.exe", lnk: "Windows Update Blocker" }
+    - { exe: "{{ ansible_env.USERPROFILE }}\\Desktop\\My_Tools\\Maintainance\\Net Disabler.exe", lnk: "Net Disabler" }
