@@ -29,6 +29,16 @@
     state: present
   ignore_errors: true
 
+- name: Tools | Download Google chrome browser
+  win_get_url:
+    url: "https://dl.google.com/chrome/install/375.126/chrome_installer.exe"
+    dest: "{{ temp_space }}\\chrome_installer.exe"
+
+- name: Tools | Install Google chrome
+  win_shell: cmd /c "{{ temp_space }}\\chrome_installer.exe" /install
+  async: 1
+  poll: 0
+
 - name: Tools | Initiate tools installation using chocolatey package manager
   win_chocolatey:
     name: "{{ item }}"
