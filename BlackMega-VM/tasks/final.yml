@@ -33,6 +33,27 @@
     type: string
     state: present
 
+- name: Finalize | Show accent color on Start and taskbar
+  win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize
+    name: ColorPrevalence
+    data: 0x01
+    type: dword
+
+- name: Finalize | Show accent color on title bars and windows borders
+  win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\DWM
+    name: ColorPrevalence
+    data: 0x01
+    type: dword
+
+- name: Finalize | Enable transperency effects
+  win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize
+    name: EnableTransparency
+    data: 0x01
+    type: dword
+
 - name: Finalize | Change the background color
   win_regedit:
     path: HKCU:\Control Panel\Colors
@@ -41,9 +62,14 @@
     type: string
     state: present
 
-- name: Finalize | Show accent color on Start and taskbar
-  win_regedit:
-    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize
-    name: ColorPrevalence
-    data: 0x01
-    type: dword
+- name: Finalize | Change the accent palette colors
+  win_regedit: 
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent
+    name: "{{ item.reg_name }}"
+    data: "{{ item.reg_data }}"
+    type: "{{ item.reg_type }}"
+    state: present
+  loop:
+    - { reg_name: "AccentColorMenu", reg_type: dword,  reg_data: "0xff7d3401" }
+    - { reg_name: "StartColorMenu",  reg_type: dword,  reg_data: "0xff652a00" }
+    - { reg_name: "AccentPalette",   reg_type: binary, reg_data: "hex:01,58,d4,ff,01,49,b1,ff,01,3f,97,ff,01,34,7e,ff,00,2a,65,ff,00,1f,4b,ff,00,10,28,ff,88,17,98,00" }
