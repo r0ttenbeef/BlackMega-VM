@@ -1,4 +1,21 @@
 ---
+- name: Configurations | Install Nuget package provider
+  win_shell: |
+    Install-PackageProvider -Name Nuget -Force
+
+- name: Configurations | Install PSCX PS Module
+  win_psmodule:
+    name: Pscx
+    accept_license: true
+    allow_clobber: true
+    state: present
+
+- name: Configurations | Disable AMSI using powershell
+  win_shell: |
+    Set-MpPreference -DisableRealtimeMonitoring $true
+    Set-MpPreference -DisableBehaviorMonitoring $true
+    Set-MpPreference -DisableScriptScanning $true
+
 - name: Configurations | Download required utilities
   win_get_url:
     url: "{{ item.link }}"
@@ -7,13 +24,14 @@
     - { link: "https://www.sordum.org/files/downloads.php?st-windows-update-blocker", name: "windows-update-blocker.zip" }
     - { link: "https://www.sordum.org/files/downloads.php?st-edge-block", name: "edge-block.zip" }
     - { link: "https://www.sordum.org/files/downloads.php?st-net-disabler", name: "net-disabler.zip" }
+    - { link: "https://github.com/r0ttenbeef/BlackMega-VM/releases/download/dControl/defender-control.zip", name: "defender-control.zip" }
 
 - name: Configurations | Unzip downloaded utilities
   win_unzip:
     src: "{{ temp_space }}\\{{ item.archive }}"
     dest: "{{ temp_space }}"
     delete_archive: true
-    password: sordum
+    password: blackmega
   loop:
     - { archive: "windows-update-blocker.zip" }
     - { archive: "edge-block.zip" }
@@ -29,6 +47,7 @@
     - { file_path: "Wub\\Wub_x64.exe", file_name: "Windows Update Blocker.exe" }
     - { file_path: "EdgeBlock\\EdgeBlock_x64.exe", file_name: "Edge Block.exe" }
     - { file_path: "NetDisabler\\NetDisabler_x64.exe", file_name: "Net Disabler.exe" }
+    - { file_path: "dControl.exe", file_name: "Defender Control.exe" }
 
 - name: Configurations | Disable windows updates
   win_shell: |
