@@ -1,4 +1,18 @@
 ---
+- name: Desktop Customizing | Get all shortcut files
+  win_find:
+    paths:
+      - "{{ ansible_env.PUBLIC }}\\Desktop"
+      - "{{ ansible_env.USERPROFILE }}\\Desktop"
+    patterns: "*.lnk"
+  register: lnk_files
+
+- name: Desktop Customizing | Remove usless shortcuts
+  win_file:
+    path: "{{ item.path }}"
+    state: absent
+  with_items: "{{ lnk_files.files }}"
+
 - name: Desktop Customizing | Create desktop folders
   win_file:
     path: "{{ ansible_env.USERPROFILE }}\\Desktop\\{{ item.folder }}"
