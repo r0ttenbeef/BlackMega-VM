@@ -11,9 +11,9 @@
     - { service: "BITS" }
     - { service: "DiagTrack" }
 
-- name: Debloat | Remove windows pre-installed unnecessary applications
+- name: Debloat | Remove usless AppX applications
   win_shell: |
-      IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/Sycnex/Windows10Debloater/raw/master/Windows10SysPrepDebloater.ps1")
+    IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/Sycnex/Windows10Debloater/raw/master/Individual%20Scripts/Debloat%20Windows")
 
 - name: Debloat | Uninstall OneDrive
   win_shell: |
@@ -22,6 +22,14 @@
 - name: Debloat | Disable Cortana
   win_shell: |
     IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/Sycnex/Windows10Debloater/raw/master/Individual%20Scripts/Disable%20Cortana")
+
+- name: Debloat | Privacy Protection
+  win_shell: |
+    IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/Sycnex/Windows10Debloater/raw/master/Individual%20Scripts/Protect%20Privacy")
+
+- name: Debloat | Remove bloatware registry keys
+  win_shell: |
+    IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/Sycnex/Windows10Debloater/raw/master/Individual%20Scripts/Remove%20Bloatware%20RegKeys")
 
 - name: Debloat | Reinstall Microsoft Terminal
   win_chocolatey:
