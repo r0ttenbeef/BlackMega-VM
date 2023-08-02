@@ -70,6 +70,6 @@
     type: "{{ item.reg_type }}"
     state: present
   loop:
-    - { reg_name: "AccentColorMenu", reg_type: dword,  reg_data: "0xff7d3401" }
-    - { reg_name: "StartColorMenu",  reg_type: dword,  reg_data: "0xff652a00" }
-    - { reg_name: "AccentPalette",   reg_type: binary, reg_data: "hex:01,58,d4,ff,01,49,b1,ff,01,3f,97,ff,01,34,7e,ff,00,2a,65,ff,00,1f,4b,ff,00,10,28,ff,88,17,98,00" }
+    - { reg_name: "AccentColorMenu", reg_type: dword,  reg_data: "0xff4b1f01" }
+    - { reg_name: "StartColorMenu",  reg_type: dword,  reg_data: "0xff642901" }
+    - { reg_name: "AccentPalette",   reg_type: binary, reg_data: "hex:02,57,d3,ff,02,48,b0,ff,02,3e,96,ff,01,34,7d,ff,01,29,64,ff,01,1f,4b,ff,00,10,28,ff,88,17,98,00" }
