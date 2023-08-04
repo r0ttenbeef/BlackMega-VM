@@ -81,6 +81,12 @@
     type: dword
     state: present
 
+- name: Configurations | Disable windows disk defragmentation
+  win_scheduled_task:
+    path: \Microsoft\Windows\Defrag
+    name: ScheduledDefrag
+    enabled: no
+
 - name: Configurations | Revert back to the classic context menu on windows 11
   win_regedit:
     path: HKCU:\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32
