@@ -11,10 +11,6 @@
     - { service: "BITS" }
     - { service: "DiagTrack" }
 
-- name: Debloat | Remove usless AppX applications
-  win_shell: |
-    IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/Sycnex/Windows10Debloater/raw/master/Individual%20Scripts/Debloat%20Windows")
-
 - name: Debloat | Uninstall OneDrive
   win_shell: |
     IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/Sycnex/Windows10Debloater/raw/master/Individual%20Scripts/Uninstall%20OneDrive")
@@ -22,6 +18,10 @@
 - name: Debloat | Disable Cortana
   win_shell: |
     IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/Sycnex/Windows10Debloater/raw/master/Individual%20Scripts/Disable%20Cortana")
+
+- name: Debloat | Uninstall MicrosoftTeams
+  win_shell: |
+    Get-AppxPackage -allusers MicrosoftTeams | Remove-AppxPackage
 
 - name: Debloat | Privacy Protection
   win_shell: |
