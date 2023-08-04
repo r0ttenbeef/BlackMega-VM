@@ -9,11 +9,15 @@
   win_optional_feature:
     name: NetFx3
     state: present
+  become: yes
+  become_method: runas
+  become_user: System
   ignore_errors: true
 
 - name: Tools | Install Sysinternal Gadgets
   win_chocolatey:
     name: "{{ item }}"
+    ignore_checksums: true
     state: present
   loop: "{{ sysinternal_tools }}"
 
@@ -27,6 +31,9 @@
   win_optional_feature:
     name: NetFx3
     state: present
+  become: yes
+  become_method: runas
+  become_user: System
   ignore_errors: true
 
 - name: Tools | Download Google chrome browser
