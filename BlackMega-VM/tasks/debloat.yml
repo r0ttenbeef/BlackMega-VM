@@ -30,9 +30,3 @@
 - name: Debloat | Remove bloatware registry keys
   win_shell: |
     IEX(New-Object System.Net.WebClient).DownloadString("https://github.com/Sycnex/Windows10Debloater/raw/master/Individual%20Scripts/Remove%20Bloatware%20RegKeys")
-
-- name: Debloat | Reinstall Microsoft Terminal
-  win_chocolatey:
-    name: "microsoft-windows-terminal"
-    state: present
-    force: yes
